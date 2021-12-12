@@ -1,7 +1,20 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+export default defineComponent({
+  name: "Home",
+  setup(props, context) {
+    const loading = ref("22");
+    console.log(props, context);
+    const route = useRoute();
+    const router = useRouter();
+    console.log("route", route.path, route.params, route.query);
+    console.log("router", router);
+    return {
+      loading,
+    };
+  },
+});
 </script>
 
 <template>

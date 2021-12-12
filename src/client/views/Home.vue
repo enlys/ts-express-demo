@@ -23,6 +23,7 @@ export default defineComponent({
   setup(props, context) {
     const loading = ref("22");
     console.log(props, context);
+    console.log(111, window.document.querySelector('meta[name="csrf-token"]'));
     const route = useRoute();
     const router = useRouter();
     const store = useStore();

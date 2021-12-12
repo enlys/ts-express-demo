@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import csrf from 'csurf';
 import path from 'path';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import history from 'connect-history-api-fallback';
 import pkg from '../package.json';
 import router from "./routes";
 
@@ -32,9 +33,7 @@ app.use(cookieSession({
 }));
 app.use(csrf());
 
-
-console.log(app.get('env'));
-
+// 1.添加代理
 if (app.get('env') === 'development') {
   // proxy middleware options
   const options = {
@@ -50,10 +49,26 @@ if (app.get('env') === 'development') {
     createProxyMiddleware(options),
   );
 }
+
+// 2.适配路由 HTML5 history模式
+app.use(
+  publicPath,
+  history({
+    index: '/',
+    rewrites: [
+      {
+        from: /^\/api\/.*$/,
+        to: context => context.parsedUrl.pathname
+      }
+    ]
+  })
+);
+
+
 // api
 app.use(`${publicPath}api`, router);
 // page
-app.get('*', async (req: any, res) => {
+app.get(`${publicPath}`, async (req: any, res) => {
   res.render('index', {
     title: 'demo',
     isProd,

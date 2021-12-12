@@ -5,12 +5,12 @@ const router = createRouter({
     history: createWebHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
     routes: [
       {
-        path: '/demo/assets/home',
+        path: '/',
         name: 'Home',
         component: Home
       },
       {
-        path: '/demo/assets/about',
+        path: '/about',
         name: 'About',
         component: () => import(/* webpackChunkName: "data" */ '../views/About.vue')
       },
