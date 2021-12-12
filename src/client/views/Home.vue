@@ -15,6 +15,8 @@ import { defineComponent, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { mapState, useStore } from "vuex";
 import { Button } from 'vant';
+import { hello } from '@/api/data';
+
 export default defineComponent({
   name: "Home",
   components: {
@@ -22,7 +24,6 @@ export default defineComponent({
   },
   setup(props, context) {
     const loading = ref("22");
-    console.log(props, context);
     console.log(111, window.document.querySelector('meta[name="csrf-token"]'));
     const route = useRoute();
     const router = useRouter();
@@ -35,6 +36,7 @@ export default defineComponent({
         name: "About",
       });
     }
+    hello();
     function add() {
       loading.value = loading.value + "111";
     }
