@@ -2,14 +2,18 @@ import express, { Request, Response, NextFunction, ErrorRequestHandler } from "e
 import bodyParser from "body-parser"; // 解析body
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
-import compression from 'compression';
-import helmet from 'helmet';
-import csrf from 'csurf';
+import compression from 'compression'; // 开启GZIP压缩 
+import helmet from 'helmet'; // web 安全防护中间件(按需使用) https://www.npmjs.com/package/helmet
+import csrf from 'csurf';  // 防止跨站点请求伪造
 import path from 'path';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import history from 'connect-history-api-fallback';
+import fs from 'fs';
+// import cors from 'cors'; // 允许跨域（按需使用）
+// import assetPath from './helpers/assetPath';
 import pkg from '../package.json';
 import router from "./routes";
+import assetPath from "./helpers/assetPath";
 
 const app = express();
 
@@ -20,9 +24,11 @@ const ip: string = process.env.HTTP_IP || '0.0.0.0';
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// app.set('trust proxy', true);
 
 app.use(compression());
-app.use(helmet());
+// app.use(helmet());
+app.use(helmet.xssFilter());
 app.use(publicPath, express.static(path.resolve(__dirname, '../public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -32,6 +38,14 @@ app.use(cookieSession({
   keys: ['session-secret'],
 }));
 app.use(csrf());
+// app.use(cors());
+
+console.log(app.get('env'), isProd);
+if (app.get('env') === "production") {
+  const content = fs.readFileSync(path.join(__dirname, "../public/manifest.json"), "utf8");
+  app.set('assetsManifest', JSON.parse(content))
+}
+
 
 // 1.添加代理
 if (app.get('env') === 'development') {
@@ -74,6 +88,11 @@ app.get(`${publicPath}`, async (req: any, res) => {
     isProd,
     publicPath,
     csrfToken: req.csrfToken(),
+    manifest: app.get('assetsManifest'),
+    asset_path: assetPath(req, {
+      publicPath: `${publicPath}assets/`,
+      prepend: ''
+    }),
   });
 });
 

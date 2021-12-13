@@ -10,16 +10,14 @@
     "start": "node dist/index.js",
     "dev:client": "vite serve --config vite.config.ts",
     "dev:server": "nodemon --exec ts-node -w src src/server.ts",
-    "build:client": "vue-tsc --noEmit && vite build --config vite.config.ts --emptyOutDir",
+    "build:client": "vite build --config vite.config.prod.ts --emptyOutDir",
     "build:server": "tsc && cp -r src/config *.conf dist/",
     "lint:fix": "tslint --fix -c tslint.json -p tsconfig.json && git add .",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "release": "npm-run-all clean build release:copy release:deps release:package",
     "release:copy": "cross-env-shell \"shx mkdir -p release/$npm_package_app && shx cp -r dist/  *.json *.conf release/$npm_package_app\" ",
     "release:deps": "cross-env-shell \"cd release/$npm_package_app && npm install --production\" ",
-    "release:package": "cross-env-shell \"cd release && tar -zcvf $npm_package_app.tar.gz $npm_package_app\" ",
-    "upload": "cross-env-shell \"up upload release/$npm_package_name.tar.gz -a ZXCRM -s $npm_package_name\" ",
-    "preBuild": "ts-node ./src/buildScript/jce2dts.ts"
+    "release:package": "cross-env-shell \"cd release && tar -zcvf $npm_package_app.tar.gz $npm_package_app\" "
   },
   "dependencies": {
     "body-parser": "^1.19.1",
@@ -27,6 +25,7 @@
     "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",

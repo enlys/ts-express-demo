@@ -8,11 +8,22 @@
     <base href="<%= publicPath %>">
     <title><%= title %></title>
     <link rel="icon" href="<%= publicPath %>favicon.ico">
+    <% if(isProd){ %>
+      <link rel="stylesheet" href="<%= asset_path('main.ts')['css'] %>" />
+    <% } %>
   </head>
   <body>
     1
     <div id="app"></div>
-    <script type="module" src="/demo/assets/@vite/client"></script>
-    <script type="module" src="/demo/assets/main.ts"></script>
+    <% if(isProd){ %>
+      <script type="module" src="<%= asset_path('main.ts')['file'] %>"></script>
+    <% } else {%>
+      <script type="module" src="/demo/assets/@vite/client"></script>
+      <script type="module" src="/demo/assets/main.ts"></script>
+    <% } %>
+    <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+    <script>
+      var vConsole = new VConsole();
+    </script>
   </body>
 </html>

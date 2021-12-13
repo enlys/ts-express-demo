@@ -1,0 +1,44 @@
+{
+  "main.ts": {
+    "file": "assets/js/main-d3cbc027.js",
+    "src": "main.ts",
+    "isEntry": true,
+    "imports": [
+      "_vendor-aafa6671.js"
+    ],
+    "dynamicImports": [
+      "views/Home.vue",
+      "views/About.vue"
+    ],
+    "css": [
+      "assets/css/main-3713c244.css"
+    ]
+  },
+  "_vendor-aafa6671.js": {
+    "file": "assets/js/vendor-aafa6671.js"
+  },
+  "views/Home.vue": {
+    "file": "assets/js/Home-645cf321.js",
+    "src": "views/Home.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-aafa6671.js",
+      "main.ts"
+    ],
+    "css": [
+      "assets/css/Home-60238967.css"
+    ]
+  },
+  "views/About.vue": {
+    "file": "assets/js/About-f1a7e9a0.js",
+    "src": "views/About.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "main.ts",
+      "_vendor-aafa6671.js"
+    ],
+    "css": [
+      "assets/css/About-9ede6166.css"
+    ]
+  }
+}
