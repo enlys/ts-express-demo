@@ -56,14 +56,15 @@ export default defineConfig({
   plugins: [
     vue(),
     styleImport({
-      resolves: [
-        VantResolve(),
-      ],
+      // resolves: [
+      //   VantResolve(),
+      // ],
       libs: [
         {
           libraryName: 'vant',
           esModule: true,
-          resolveStyle: (name) => `vant/es/${name}/style/index`,
+          // Vant 从 3.3.2 版本之后 ../es/${name}/style/index  之前 vant/es/${name}/style
+          resolveStyle: (name) => `../es/${name}/style/index`,
         },
       ],
     }),

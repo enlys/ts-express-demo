@@ -41,7 +41,7 @@ if (app.get('env') === 'development') {
     // changeOrigin: true, // needed for virtual hosted sites
     ws: true, // proxy websockets
     pathRewrite: {
-      '^/demo/assets/': `demo/assets/`, // rewrite path
+      '^/demo/assets/': `/demo/assets/`, // rewrite path
     },
   };
   app.use(
