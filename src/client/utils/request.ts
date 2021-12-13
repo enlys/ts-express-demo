@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Toast } from 'vant';
 
-const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+const csrfToken = document!.querySelector('meta[name="csrf-token"]')!.getAttribute('content');
 
 class Request {
   public axiosInstance: AxiosInstance;
@@ -28,8 +28,8 @@ class Request {
       (config: AxiosRequestConfig) => {
         // 登录流程控制中，根据本地是否存在token判断用户的登录情况
         // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
-        config.headers['Content-Type'] = 'application/json';
-        config.headers['CSRF-Token'] = csrfToken;
+        config!.headers!['Content-Type'] = 'application/json';
+        config!.headers!['CSRF-Token'] = csrfToken!;
         return config;
       },
       (error: any) => {
