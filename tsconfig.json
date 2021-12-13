@@ -79,8 +79,7 @@
     "resolveJsonModule": true,
   },
   "include": [
-    "src/**/*",
-    "vite.config.ts"
+    "src/**/*"
   ],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "src/client"]
 }

@@ -1,8 +1,8 @@
 {
-  "name": "ts_express",
+  "name": "tsExpressDemoWebServer",
   "version": "1.0.0",
   "path": "/demo/",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "dev": "concurrently -k \"npm run dev:client\" \"npm run dev:server\"",
     "build": "npm-run-all clean --parallel build:*",
@@ -11,13 +11,13 @@
     "dev:client": "vite serve --config vite.config.ts",
     "dev:server": "nodemon --exec ts-node -w src src/server.ts",
     "build:client": "vite build --config vite.config.prod.ts --emptyOutDir",
-    "build:server": "tsc && cp -r src/config *.conf dist/",
+    "build:server": "tsc && cp -r src/config dist/src/config",
     "lint:fix": "tslint --fix -c tslint.json -p tsconfig.json && git add .",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "release": "npm-run-all clean build release:copy release:deps release:package",
-    "release:copy": "cross-env-shell \"shx mkdir -p release/$npm_package_app && shx cp -r dist/  *.json *.conf release/$npm_package_app\" ",
-    "release:deps": "cross-env-shell \"cd release/$npm_package_app && npm install --production\" ",
-    "release:package": "cross-env-shell \"cd release && tar -zcvf $npm_package_app.tar.gz $npm_package_app\" "
+    "release:copy": "cross-env-shell \"shx mkdir -p release/$npm_package_name && shx cp -r dist/ public/ *.json release/$npm_package_name\" ",
+    "release:deps": "cross-env-shell \"cd release/$npm_package_name && npm install --production\" ",
+    "release:package": "cross-env-shell \"cd release && tar -zcvf $npm_package_name.tar.gz $npm_package_name\" "
   },
   "dependencies": {
     "body-parser": "^1.19.1",
