@@ -1,3 +1,4 @@
+import './polyfills';
 async function bootstrap() {
 
   const app = require('./app').default;

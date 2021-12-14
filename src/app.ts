@@ -11,14 +11,14 @@ import history from 'connect-history-api-fallback';
 import fs from 'fs';
 // import cors from 'cors'; // 允许跨域（按需使用）
 // import assetPath from './helpers/assetPath';
-import pkg from '../package.json';
+// import pkg from '../package.json';
 import router from "./routes";
 import assetPath from "./helpers/assetPath";
 
 const app = express();
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
-const publicPath: string = pkg.path || '/';
+const publicPath: string = '/demo/';
 const port: any = process.env.HTTP_PORT || '3000';
 const ip: string = process.env.HTTP_IP || '0.0.0.0';
 
