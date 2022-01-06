@@ -26,7 +26,7 @@ export function use(middleware: RequestHandler) {
     return function (target, key: string) {
       const middlewares = Reflect.getMetadata(MIDDLE_WARES, target, key) || []
       middlewares.push(middleware)
-      Reflect.defineMetadata('middlewares', middlewares, target, key)
+      Reflect.defineMetadata(MIDDLE_WARES, middlewares, target, key)
     }
   }
   

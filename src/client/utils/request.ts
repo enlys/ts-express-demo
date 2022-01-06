@@ -19,7 +19,7 @@ class Request {
   // 初始化拦截器
   public initInterceptors() {
     // 设置post请求头
-    this.axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    // this.axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     /**
      * 请求拦截器
      * 每次请求前，如果存在token则在请求头中携带token

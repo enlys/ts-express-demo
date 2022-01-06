@@ -1,7 +1,7 @@
 import { Router, RequestHandler } from 'express';
 import Data from '../controllers/Data';
 import { CONTROLLER_METADATA, ROUTE_METADATA, MIDDLE_WARES, ROUTE_PATH } from '../common/constant';
-console.log('router');
+
 
 const router = Router();
 
@@ -19,16 +19,16 @@ Object.values(controllerStore).forEach(instance => {
   );
 
   routeNameArr.forEach(routeName => {
-    const method = Reflect.getMetadata(ROUTE_METADATA, instance, routeName);
-    const path = Reflect.getMetadata(ROUTE_PATH, instance, routeName);
-    const middlewares: RequestHandler[] = Reflect.getMetadata(MIDDLE_WARES, instance, routeName)
-    const handler = instance[routeName];
+    const method: string = Reflect.getMetadata(ROUTE_METADATA, instance, routeName);
+    const path: string = Reflect.getMetadata(ROUTE_PATH, instance, routeName);
+    const middlewares: RequestHandler[] = Reflect.getMetadata(MIDDLE_WARES, instance, routeName);
+    const handler: RequestHandler = instance[routeName];
     console.log(111, method, path, middlewares, handler);
     if (path && method) {
         if (middlewares && middlewares.length) {
-            router[method](`${controllerMetadata}${path}`, ...middlewares, handler)
+            router[method](`${controllerMetadata}${path}`, ...middlewares, handler);
         } else {
-            router[method](`${controllerMetadata}${path}`, handler)
+            router[method](`${controllerMetadata}${path}`, handler);
         }
     }
   });

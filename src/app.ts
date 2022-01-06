@@ -10,7 +10,6 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import history from 'connect-history-api-fallback';
 import fs from 'fs';
 // import cors from 'cors'; // 允许跨域（按需使用）
-// import assetPath from './helpers/assetPath';
 // import pkg from '../package.json';
 import router from "./routes";
 import assetPath from "./helpers/assetPath";
@@ -40,12 +39,10 @@ app.use(cookieSession({
 app.use(csrf());
 // app.use(cors());
 
-console.log(app.get('env'), isProd);
 if (app.get('env') === "production") {
   const content = fs.readFileSync(path.join(__dirname, "../public/manifest.json"), "utf8");
   app.set('assetsManifest', JSON.parse(content))
 }
-
 
 // 1.添加代理
 if (app.get('env') === 'development') {
@@ -82,13 +79,12 @@ app.use(
 // api
 app.use(`${publicPath}api`, router);
 // page
-app.get(`${publicPath}`, async (req: any, res) => {
+app.get(`${publicPath}`, async (req: any, res: Response) => {
   res.render('index', {
     title: 'demo',
     isProd,
     publicPath,
     csrfToken: req.csrfToken(),
-    manifest: app.get('assetsManifest'),
     asset_path: assetPath(req, {
       publicPath: `${publicPath}assets/`,
       prepend: ''

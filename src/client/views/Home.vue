@@ -1,56 +1,42 @@
 <template>
   <div class="home">
-    home {{ loading }}
-    <div @click="toabout">about</div>
-    <input type="text" v-model="loading" />
-    <div @click="add">add</div>
-    name {{ name }}
+    {{message}}
   </div>
-  <div class="img"></div>
-  <van-button type="primary">主要按钮</van-button>
+  <van-button type="primary" @click="toabout" size="mini">about</van-button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { mapState, useStore } from "vuex";
-import { Button } from 'vant';
+import { Button as VanButton } from 'vant';
 import { hello } from '@/api/data';
 
-export default defineComponent({
-  name: "Home",
-  components: {
-    [Button.name]: Button,
-  },
-  setup(props, context) {
-    const loading = ref("22");
-    console.log(111, window.document.querySelector('meta[name="csrf-token"]'));
-    const route = useRoute();
-    const router = useRouter();
-    const store = useStore();
-    console.log("route", route.path, route.params, route.query);
-    console.log("router", router);
-    console.log('store', store);
-    function toabout() {
-      router.push({
-        name: "About",
-      });
-    }
-    hello();
-    function add() {
+defineExpose({
+  name: 'Home',
+})
+
+const message = ref("hello world!");
+console.log(111, window.document.querySelector('meta[name="csrf-token"]'));
+const route = useRoute();
+const router = useRouter();
+const store = useStore();
+console.log("route", route.path, route.params, route.query);
+console.log("router", router);
+console.log('store', store);
+function toabout() {
+  router.push({
+    name: "About",
+  });
+}
+hello();
+function add() {
       loading.value = loading.value + "111";
-    }
-    return {
-      loading,
-      toabout,
-      add,
-    };
-  },
-  computed: mapState([
-    // 映射 this.count 为 store.state.count
-    "name",
-  ]),
-});
+}
+computed: mapState([
+  // 映射 this.count 为 store.state.count
+  "name",
+])
 </script>
 
 <style lang="less" scoped>

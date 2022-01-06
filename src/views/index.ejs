@@ -13,13 +13,12 @@
     <% } %>
   </head>
   <body>
-    1
     <div id="app"></div>
     <% if(isProd){ %>
       <script type="module" src="<%= asset_path('main.ts')['file'] %>"></script>
     <% } else {%>
-      <script type="module" src="/demo/assets/@vite/client"></script>
-      <script type="module" src="/demo/assets/main.ts"></script>
+      <script type="module" src="<%= publicPath %>assets/@vite/client"></script>
+      <script type="module" src="<%= publicPath %>assets/main.ts"></script>
     <% } %>
     <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
     <script>

@@ -44,15 +44,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src/client")
     }
   },
-  build: {
-    // 在 outDir 中生成 manifest.json
-    manifest: true,
-    outDir: '../../public',
-    rollupOptions: {
-      // 覆盖默认的 .html 入口
-      input: './main.ts'
-    }
-  },
   plugins: [
     vue(),
     styleImport({

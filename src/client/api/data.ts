@@ -1,8 +1,8 @@
-import Request  from '../utils/request';
+import Request from '../utils/request';
 
 export function hello() {
-    return Request.axiosInstance({
-        url: `/data/hello`,
-        method: 'get',
-    });
+  return Request.axiosInstance({
+    url: `/data/hello`,
+    method: 'get',
+  });
 }

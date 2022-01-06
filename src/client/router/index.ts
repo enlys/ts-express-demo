@@ -4,7 +4,7 @@ const router = createRouter({
     history: createWebHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
     routes: [
       {
-        path: '/home',
+        path: '/',
         name: 'Home',
         component: () => import('../views/Home.vue')
       },
