@@ -52,10 +52,10 @@ export default defineConfig({
       // 覆盖默认的 .html 入口
       input: './main.ts',
       output: {
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
-      },
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: '[ext]/[name]-[hash].[ext]',
+      },  
     }
   },
   plugins: [
@@ -69,7 +69,7 @@ export default defineConfig({
           libraryName: 'vant',
           esModule: true,
           // Vant 从 3.3.2 版本之后 ../es/${name}/style/index  之前 vant/es/${name}/style
-          resolveStyle: (name) => `../es/${name}/style/index`,
+          resolveStyle: (name) => `vant/es/${name}/style`,
         },
       ],
     }),

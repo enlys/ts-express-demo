@@ -9,8 +9,10 @@ import path from 'path';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import history from 'connect-history-api-fallback';
 import fs from 'fs';
+import { config } from '@up/taf-conf';
 // import cors from 'cors'; // 允许跨域（按需使用）
 // import pkg from '../package.json';
+
 import router from "./routes";
 import assetPath from "./helpers/assetPath";
 
@@ -89,6 +91,7 @@ app.get(`${publicPath}`, async (req: any, res: Response) => {
       publicPath: `${publicPath}assets/`,
       prepend: ''
     }),
+    test: config.get('test'),
   });
 });
 

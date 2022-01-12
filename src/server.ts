@@ -1,9 +1,26 @@
 import './polyfills';
+import path from 'path';
+import { load } from '@up/taf-conf';
+
 async function bootstrap() {
 
-  const app = require('./app').default;
+  try {
+    await load({
+      localFile: path.join(__dirname, './config/config.json'),
+      appName: 'tsExpressDemoWebServer',
+    });
+    require('./app').default;
 
-  return app;
+  } catch (error) {
+    console.error('Start server error: ', error);
+    setTimeout(() => {
+      process.exit(1);
+    }, 100);
+  }
+
+  // const app = require('./app').default;
+
+  // return app;
 }
 
 process.on('unhandledRejection', (reason, p) => {

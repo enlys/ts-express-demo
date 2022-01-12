@@ -20,6 +20,7 @@
     "release:package": "cross-env-shell \"cd release && tar -zcvf $npm_package_name.tar.gz $npm_package_name\" "
   },
   "dependencies": {
+    "@up/taf-conf": "^1.3.0",
     "body-parser": "^1.19.1",
     "compression": "^1.7.4",
     "connect-history-api-fallback": "^1.6.0",
