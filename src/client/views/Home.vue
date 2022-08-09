@@ -44,6 +44,5 @@ computed: mapState([
   width: 20px;
   height: 20px;
   display: flex;
-  background: url('/logo.png');
 }
 </style>

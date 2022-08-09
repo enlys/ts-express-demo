@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false, // 允许隐式的any类型
+    "lib": ["esnext", "dom"]
+  },
+  "include": [
+    "**/*",
+    "*.ts",
+    "**/*.d.ts",
+    "env.d.ts"
+  ]
+}
