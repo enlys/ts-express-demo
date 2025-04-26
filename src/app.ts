@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import compression from 'compression'; // 开启GZIP压缩 
 import helmet from 'helmet'; // web 安全防护中间件(按需使用) https://www.npmjs.com/package/helmet
-import csrf from 'csurf';  // 防止跨站点请求伪造
+// import csrf from 'csurf';  // 防止跨站点请求伪造
 import path from 'path';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import history from 'connect-history-api-fallback';
@@ -38,7 +38,21 @@ app.use(cookieSession({
   name: 'session',
   keys: ['session-secret'],
 }));
-app.use(csrf());
+// CSRF保护配置（带白名单）
+// <meta name="csrf-token" content="<%= csrfToken %>">
+// app.use(csrf({
+//   ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST'],
+//   ignore: (req) => {
+//     const whiteList = [
+//       '/demo/api/monitor/*'
+//     ];
+//     return whiteList.some(pattern => {
+//       console.log('req.path', req.path);
+//       const regex = new RegExp(pattern.replace('*', '.*'));
+//       return regex.test(req.path);
+//     });
+//   }
+// }));
 // app.use(cors());
 
 if (app.get('env') === "production") {
@@ -86,7 +100,7 @@ app.get(`${publicPath}`, async (req: any, res: Response) => {
     title: 'demo',
     isProd,
     publicPath,
-    csrfToken: req.csrfToken(),
+    // csrfToken: req.csrfToken(),
     asset_path: assetPath(req, {
       publicPath: `${publicPath}assets/`,
       prepend: ''

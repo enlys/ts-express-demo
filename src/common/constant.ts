@@ -8,4 +8,5 @@ export enum Methods {
     post = 'post',
     put = 'put',
     delete = 'delete',
+    all = 'all',
   }

@@ -30,13 +30,6 @@ function toabout() {
   });
 }
 hello();
-function add() {
-      loading.value = loading.value + "111";
-}
-computed: mapState([
-  // 映射 this.count 为 store.state.count
-  "name",
-])
 </script>
 
 <style lang="less" scoped>

@@ -5,6 +5,7 @@ import path from "path";
 import styleImport, {
   VantResolve,
 } from 'vite-plugin-style-import'
+import Inspect from 'vite-plugin-inspect'
 // import path from 'path';
 
 // https://vitejs.dev/config/
@@ -45,6 +46,7 @@ export default defineConfig({
     }
   },
   plugins: [
+    Inspect(),
     vue(),
     styleImport({
       // resolves: [

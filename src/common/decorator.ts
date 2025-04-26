@@ -21,6 +21,7 @@ export const get = getRequestDecorator(Methods.get)
 export const post = getRequestDecorator(Methods.post)
 export const put = getRequestDecorator(Methods.put)
 export const del = getRequestDecorator(Methods.delete)
+export const all = getRequestDecorator(Methods.all)
 
 export function use(middleware: RequestHandler) {
     return function (target, key: string) {

@@ -1,12 +1,29 @@
 <template>
-  <div>about</div>
-  <div>title</div>
+  <div :class="count + 1">about {{ count }}</div>
+  <div v-if="count >= 0">title {{ count + 10 }}</div>
 </template>
 
-<script lang="ts">
-export default {
+<script lang="ts" setup>
+import { defineComponent, ref, watch, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-}
+defineExpose({
+  name: 'about',
+})
+
+const loading = ref("22");
+const route = useRoute();
+const router = useRouter();
+console.log("route", route.path, route.params, route.query);
+console.log("router", router);
+const count = ref(1);
+watch(count, (newX) => {
+  console.log(`x is ${newX}`)
+})
+const double = computed(() => {
+  console.log("double");
+  return count.value * 2;
+});
 </script>
 
 <style lang="less" scoped>
